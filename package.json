@@ -10,6 +10,7 @@
     "prettier": "prettier . --write"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "eslint-config-prettier": "^10.1.5",
     "next": "14.2.29",
     "prettier": "^3.5.3",
