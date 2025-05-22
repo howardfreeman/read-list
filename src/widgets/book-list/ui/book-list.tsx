@@ -1,14 +1,14 @@
-import { Book, BookCard } from "@/entities/book";
-import { AddToReadButton } from "@/features/add-to-read";
-
-export function BookList({ books }: { books: Book[] }) {
+export function BookList({
+  title,
+  children,
+}: {
+  title: string;
+  children: Readonly<React.ReactNode>;
+}) {
   return (
-    <div className="grid grid-cols-4 gap-5 w-fit mx-auto">
-      {books.map((book) => (
-        <BookCard key={book.key} book={book}>
-          <AddToReadButton book={book} />
-        </BookCard>
-      ))}
+    <div className="w-fit mx-auto">
+      <h2 className="text-lg font-semibold mb-5">{title}</h2>
+      <div className="grid grid-cols-4 gap-5">{children}</div>
     </div>
   );
 }

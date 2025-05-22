@@ -33,9 +33,17 @@ export function BookCard({
         >
           {title}
         </div>
-        <div className="text-xs font-normal text-slate-600 mb-2">
-          {author_name[0]}
-        </div>
+
+        {author_name && (
+          <div className="text-xs font-normal text-slate-600 mb-2">
+            {author_name.length > 3 ? (
+              <span>{author_name.slice(0, 3).join(", ")} и др.</span>
+            ) : (
+              author_name.join(", ")
+            )}
+          </div>
+        )}
+
         {first_publish_year && (
           <div className="text-sm">
             Опубликовано:{" "}
