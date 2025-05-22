@@ -49,7 +49,7 @@ export function SearchInput({
   return (
     <div className="flex justify-center">
       <input
-        className="w-96 h-10 px-2 rounded-lg focus:shadow focus:outline-none"
+        className="w-80 h-10 px-2 rounded-lg focus:shadow focus:outline-none sm:w-96"
         type="text"
         placeholder="Найти книгу"
         autoFocus
