@@ -2,8 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { getBooks } from "../api/get-books";
+import { Book } from "@/entities/book";
 
-export function SearchInput() {
+export function SearchInput({
+  onFetch,
+}: {
+  onFetch: React.Dispatch<React.SetStateAction<Book[]>>;
+}) {
   const [inputValue, setInputValue] = useState("");
   const controllerRef = useRef<AbortController | null>(null);
 
@@ -32,7 +37,7 @@ export function SearchInput() {
     if (e.key === "Enter") {
       try {
         const books = await getBooks(inputValue, signal);
-        console.log(books);
+        onFetch(books);
       } catch (err) {
         if (err instanceof DOMException && err.name === "AbortError") {
           console.log("Request was aborted");

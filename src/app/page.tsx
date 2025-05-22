@@ -1,10 +1,10 @@
-import { SearchInput } from "@/features/search-books";
+import { BookListWithSearchInput } from "@/widgets/book-list";
 
 export default function Home() {
   return (
     <>
       <h1>Read List</h1>
-      <SearchInput />
+      <BookListWithSearchInput />
     </>
   );
 }

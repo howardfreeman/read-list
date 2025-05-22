@@ -10,7 +10,7 @@ export const bookApi = {
     limit: number = DEFAULT_RESPONSE_LIMIT,
   ): Promise<BookApiResponse> =>
     jsonApiInstance(
-      `https://openlibrary.org/search.json?q=${searchValue}&limit=${limit}&fields=title,author_name,first_publish_year`,
+      `https://openlibrary.org/search.json?q=${searchValue}&limit=${limit}&fields=key,title,author_name,first_publish_year,cover_i`,
       {
         signal,
       },
