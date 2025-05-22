@@ -10,6 +10,8 @@
     "prettier": "prettier . --write"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.76.2",
+    "@tanstack/react-query-devtools": "^5.76.2",
     "clsx": "^2.1.1",
     "eslint-config-prettier": "^10.1.5",
     "immer": "^10.1.1",

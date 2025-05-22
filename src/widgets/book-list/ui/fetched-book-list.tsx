@@ -2,8 +2,13 @@ import { Book, BookCard, useBookActions, useBooks } from "@/entities/book";
 import { AddToReadButton } from "@/features/add-to-read";
 import { BookList } from "./book-list";
 import { DeleteFromReadButton } from "@/features/delete-from-read";
+import { memo } from "react";
 
-export function FetchedBookList({ books }: { books: Book[] }) {
+export const FetchedBookList = memo(function FetchedBookList({
+  books,
+}: {
+  books: Book[];
+}) {
   const readBooks = useBooks();
   const { addBook, deleteBook } = useBookActions();
 
@@ -26,4 +31,4 @@ export function FetchedBookList({ books }: { books: Book[] }) {
       })}
     </BookList>
   );
-}
+});
