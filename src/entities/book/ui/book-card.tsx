@@ -52,7 +52,9 @@ export function BookCard({
         )}
       </div>
 
-      {children && <div className="flex justify-center py-3">{children}</div>}
+      {children && (
+        <div className="flex flex-col items-center gap-5 py-3">{children}</div>
+      )}
     </div>
   );
 }
