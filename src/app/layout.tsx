@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Header } from "@/widgets/header";
+import { AppProvider } from "./app-provider";
 
 import "./globals.css";
 
@@ -31,7 +32,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
         <Header />
-        <main className="container mx-auto py-12">{children}</main>
+
+        <AppProvider>
+          <main className="container mx-auto py-12">{children}</main>
+        </AppProvider>
       </body>
     </html>
   );

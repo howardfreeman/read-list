@@ -1,57 +1,19 @@
 "use client";
 
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { getBooks } from "../api/get-books";
-import { Book } from "@/entities/book";
+import { useSearchActions } from "../model/store";
 
 export function SearchInput({
-  setBooks,
+  searchTerm,
+  onSearch,
 }: {
-  setBooks: React.Dispatch<React.SetStateAction<Book[] | null>>;
+  searchTerm: string;
+  onSearch: () => void;
 }) {
-  const [inputValue, setInputValue] = useState("");
-  const controllerRef = useRef<AbortController | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (controllerRef.current) {
-        controllerRef.current.abort();
-      }
-    };
-  });
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setInputValue(value);
-
-    if (value === "") {
-      setBooks(null);
-    }
-  };
+  const { setSearchTerm } = useSearchActions();
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const validatedValue = inputValue.trim();
-
-    if (!validatedValue) {
-      return;
-    }
-
-    if (controllerRef.current) {
-      controllerRef.current.abort();
-    }
-
-    controllerRef.current = new AbortController();
-    const { signal } = controllerRef.current;
-
-    if (e.key === "Enter") {
-      try {
-        const books = await getBooks(inputValue, signal);
-        setBooks(books);
-      } catch (err) {
-        if (err instanceof DOMException && err.name === "AbortError") {
-          console.log("Request was aborted");
-        }
-      }
+    if (e.key === "Enter" && searchTerm.trim()) {
+      onSearch();
     }
   };
 
@@ -62,8 +24,8 @@ export function SearchInput({
         type="text"
         placeholder="Найти книгу"
         autoFocus
-        value={inputValue}
-        onChange={handleChange}
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
         onKeyDown={handleKeyDown}
       />
     </div>
