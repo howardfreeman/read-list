@@ -12,7 +12,7 @@ export function BookCard({
   const { title, author_name, first_publish_year, cover_i } = book;
 
   return (
-    <div className="flex flex-col w-44 bg-white border-2 border-slate-200 rounded-md overflow-hidden shadow">
+    <div className="flex flex-col w-52 bg-white border-2 border-slate-200 rounded-md overflow-hidden shadow">
       <div className="w-full aspect-[9/16] relative border-b-2 border-slate-200">
         {cover_i ? (
           <Image

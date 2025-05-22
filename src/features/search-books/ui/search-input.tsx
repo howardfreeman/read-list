@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { getBooks } from "../api/get-books";
 import { Book } from "@/entities/book";
 
 export function SearchInput({
-  onFetch,
+  setBooks,
 }: {
-  onFetch: React.Dispatch<React.SetStateAction<Book[]>>;
+  setBooks: React.Dispatch<React.SetStateAction<Book[] | null>>;
 }) {
   const [inputValue, setInputValue] = useState("");
   const controllerRef = useRef<AbortController | null>(null);
@@ -19,6 +19,15 @@ export function SearchInput({
       }
     };
   });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInputValue(value);
+
+    if (value === "") {
+      setBooks(null);
+    }
+  };
 
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     const validatedValue = inputValue.trim();
@@ -37,7 +46,7 @@ export function SearchInput({
     if (e.key === "Enter") {
       try {
         const books = await getBooks(inputValue, signal);
-        onFetch(books);
+        setBooks(books);
       } catch (err) {
         if (err instanceof DOMException && err.name === "AbortError") {
           console.log("Request was aborted");
@@ -49,12 +58,12 @@ export function SearchInput({
   return (
     <div className="flex justify-center">
       <input
-        className="w-96 h-10 px-2 rounded-lg focus:shadow focus:outline-none"
+        className="w-80 h-10 px-2 rounded-lg focus:shadow focus:outline-none sm:w-96"
         type="text"
         placeholder="Найти книгу"
         autoFocus
         value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
     </div>
