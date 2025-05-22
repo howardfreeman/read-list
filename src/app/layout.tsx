@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Header } from "@/widgets/header";
+
 import "./globals.css";
 
 const geistSans = localFont({
@@ -28,6 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
+        <Header />
         <main className="container mx-auto py-12">{children}</main>
       </body>
     </html>
