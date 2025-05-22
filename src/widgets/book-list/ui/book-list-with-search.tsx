@@ -3,16 +3,16 @@
 import { Book } from "@/entities/book";
 import { SearchInput } from "@/features/search-books";
 import { useState } from "react";
-import { BookList } from "./book-list";
+import { FetchedBookList } from "./fetched-book-list";
 
 export function BookListWithSearchInput() {
   const [books, setBooks] = useState<Book[]>([]);
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10 mb-12">
       <SearchInput onFetch={setBooks} />
       {books.length ? (
-        <BookList books={books} />
+        <FetchedBookList books={books} />
       ) : (
         <div className="text-center text-sm text-slate-600">Не найдено</div>
       )}
